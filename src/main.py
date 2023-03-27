@@ -1,10 +1,45 @@
 import requests
 import logging
+import re
 from requests.auth import HTTPBasicAuth
 from utils import parse_arguments as args
 
 logging.basicConfig(level=logging.INFO)
 
+def get_tech_stack_comment(comments: list) -> list:
+    """
+    Comment patterns:
+    1. Pattern 1 
+        1.2.3...
+        7. Tech stack:
+            Golang
+            Terraform
+            Argo Workflows
+            AWS S3, Macie, IAM etc.
+            Snowflake
+            DBT
+    2.
+    """
+    pattern: str =  r'^7\)?'
+
+    tech_stacks: list = []
+    all_comments: list = []
+
+    # Split the comments by break line
+    for comment in comments:
+        all_comments.append(comment['data']['body'].split('\n\n'))
+        
+    # Extract the tech stack from the pattern
+    for comment in all_comments:
+        logging.info('-'*100)
+        for i, line in enumerate(comment):
+            # Finds comment type #1
+            if line.startswith('7') and i < len(comment) - 1 and comment[i+1] is not None:
+                tech_stacks.append(comment[i+1].split('\n'))
+            logging.info(line)
+
+            
+    return
 
 def retrieve_comments(
     username: str,
@@ -78,4 +113,5 @@ if __name__ == "__main__":
     user_agent: str = arguments.user_agent
     thread_id: str = arguments.thread_id
 
-    retrieve_comments(username, password, client_id, client_key, user_agent, thread_id)
+    comments: list = retrieve_comments(username, password, client_id, client_key, user_agent, thread_id)
+    tech_stack_comments: list = get_tech_stack_comment(comments)
