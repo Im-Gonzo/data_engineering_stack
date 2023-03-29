@@ -4,23 +4,33 @@ from utils import parse_arguments as args
 
 logging.basicConfig(level=logging.INFO)
 
-def get_tech_stack_comment(comments: list) -> list:
+
+def parse_tech_stack(stack: list) -> list:
     """
-    Comment patterns:
-    1. Pattern 1 
-        1.2.3...
-        7. Tech stack:
-            Golang
-            Terraform
-            Argo Workflows
-            AWS S3, Macie, IAM etc.
-            Snowflake
-            DBT
-    2.
+    Parse the comments from the valid list of stacks:
+    []
     """
+    all_words: list = []
+
+    # Get all words from list
+    for comment in stack:
+        all_words.append(comment.split(' '))
+    
+    # Flatten nested list of lists
+    all_words = [line for sublist in all_words for line in sublist]
+
+    print(all_words)
+
+
+def parse_nested_comments(comments: list) -> list:
+    """
+    Parse the list of nested comments. 
+    """
+    
     tech_stacks: list = []
     all_comments: list = []
     nested_comments: list = []
+    nested: list = []
 
     # Split the comments by break line
     for comment in comments:
@@ -30,36 +40,25 @@ def get_tech_stack_comment(comments: list) -> list:
     for comment in all_comments:
         if len(comment) == 1:
             nested_comments.append(comment[0].split('\n'))
-    
+        else:
+            # Some comments are nested 
+            for i, line in enumerate(comment):
+                if line.startswith('7'):
+                    nested.append(comment[i:])
+
     # Flat list of list
     nested_comments = [line for sublist in nested_comments for line in sublist]
+    nested = [line for sublist in nested for line in sublist]
 
     # We save the comments with the tech stack
     for comment in nested_comments:
         if comment.startswith('7'):
             tech_stacks.append(comment)
-
-    # Extract the tech stack from the pattern
-    # for comment in all_comments:
-        # logging.info('+'*100)
-
-    # for i, line in enumerate(comment):
-    #     # print(f'Line {i+1} \n {line}')
-    #     if line.startswith('7') or line.startswith('7)'):
-    #         tech_stacks.append(comment[i:])
-    #     try:
-    #         nested_comment: list = line.split('\n\n')
-    #         for nested in enumerate(nested_comment):
-    #             if nested.startswith('7') or nested.startswith('7)'):
-    #                 tech_stacks.append(nested)
-    #     except Exception as e :
-    #         pass
-    #         # logging.info(str(e))
-            
-    for tech in tech_stacks:
-        print('-'*100)
-        print(tech)
-
+    
+    # Add stacks from nested comments
+    tech_stacks.extend(nested)
+    
+    return tech_stacks
 
 
 def retrieve_comments(
@@ -125,4 +124,5 @@ if __name__ == "__main__":
     thread_id: str = arguments.thread_id
 
     comments: list = retrieve_comments(username, password, client_id, client_key, user_agent, thread_id)
-    tech_stack_comments: list = get_tech_stack_comment(comments)
+    parsed_comments: list = parse_nested_comments(comments)
+    tech_stack: list = parse_tech_stack(parsed_comments)
