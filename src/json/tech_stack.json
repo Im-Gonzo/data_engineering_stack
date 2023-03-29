@@ -1,0 +1,97 @@
+{
+    "languages": {
+        "python": 0,
+        "sql": 0,
+        "java": 0,
+        "scala": 0,
+        "c#": 0,
+        "kotlin": 0,
+        "golang": 0,
+        "powershell": 0,
+        "bash": 0,
+        "perl": 0
+    },
+    "cloud_providers": {
+        "aws": 0,
+        "azure": 0,
+        "gcp": 0,
+        "ibm cloud": 0
+    },
+    "data_lakes_warehouses": {
+        "bigquery": 0,
+        "snowflake": 0,
+        "synapse": 0,
+        "redshift": 0,
+        "singlestore": 0,
+        "delta lake": 0,
+        "adls": 0,
+        "s3": 0,
+        "spectrum": 0,
+        "sap hana": 0,
+        "oracle exadata": 0,
+        "google bigtable": 0,
+        "emr": 0,
+        "rethinkdb": 0
+    },
+    "etl_elt_tools": {
+        "dbt": 0,
+        "fivetran": 0,
+        "airflow": 0,
+        "kafka": 0,
+        "meltano": 0,
+        "airbyte": 0,
+        "talend": 0,
+        "google dataflow": 0
+    },
+    "analytics": {
+        "looker": 0,
+        "tableau": 0,
+        "qlik": 0,
+        "powerbi": 0,
+        "quicksight": 0,
+        "oracle analytics cloud": 0,
+        "sas analytics": 0,
+        "databricks": 0
+    },
+    "frameworks": {
+        "hadoop": 0,
+        "spark": 0,
+        "flink": 0,
+        "kafka": 0,
+        "kubernetes": 0,
+        "argo workflows": 0,
+        "django": 0,
+        "laravel": 0,
+        "spring": 0
+    },
+    "iaas": {
+        "terraform": 0,
+        "cloudformation": 0,
+        "openstack": 0
+    },
+    "version_control": {
+        "github": 0,
+        "bitbucket": 0
+    },
+    "cloud_services": {
+        "pub/sub": 0,
+        "iam": 0,
+        "cloud storage": 0
+    },
+    "miscellaneous": {
+        "sql server": 0,
+        "ssas": 0,
+        "ssis": 0,
+        "hightouch": 0,
+        "logic apps": 0,
+        "node.js": 0,
+        "express": 0,
+        "typescript": 0,
+        "graphql": 0,
+        "apache beam": 0,
+        "mongodb": 0,
+        "pentaho": 0,
+        "metabase": 0,
+        "sci-kit learn": 0
+    }
+}
