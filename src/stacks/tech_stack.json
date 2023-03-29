@@ -1,0 +1,96 @@
+{
+    "languages": [
+        "python",
+        "sql",
+        "java",
+        "scala",
+        "c#",
+        "kotlin",
+        "golang",
+        "powershell",
+        "bash",
+        "perl"
+    ],
+    "cloud_providers": [
+        "aws",
+        "azure",
+        "gcp",
+        "ibm cloud"
+    ],
+    "data_lakes_warehouses": [
+        "snowflake",
+        "synapse",
+        "redshift",
+        "singlestore",
+        "delta lake",
+        "adls",
+        "s3",
+        "spectrum",
+        "sap hana",
+        "oracle exadata",
+        "google bigtable",
+        "emr",
+        "rethinkdb"
+    ],
+    "etl_elt_tools": [
+        "dbt",
+        "fivetran",
+        "airflow",
+        "kafka",
+        "meltano",
+        "airbyte",
+        "talend",
+        "google dataflow"
+    ],
+    "analytics": [
+        "looker",
+        "tableau",
+        "qlik",
+        "powerbi",
+        "quicksight",
+        "oracle analytics cloud",
+        "sas analytics",
+        "databricks"
+    ],
+    "frameworks": [
+        "hadoop",
+        "spark",
+        "flink",
+        "kafka",
+        "kuubernetes",
+        "argo workflows",
+        "django",
+        "laravel",
+        "spring"
+    ],
+    "iaas": [
+        "terraform",
+        "cloudformation",
+        "openstack"
+    ],
+    "version_control": [
+        "github",
+        "bitbucket"
+    ],
+    "cloud_services": [
+        "pub/sub",
+        "iam",
+        "cloud storage"
+    ],
+    "miscellaneous": [
+        "sql server",
+        "ssas",
+        "ssis",
+        "hightouch",
+        "logic apps",
+        "node.js",
+        "express",
+        "typescript",
+        "graphql",
+        "apache beam",
+        "mongodb",
+        "pentaho",
+        "metabase",
+        "sci-kit learn"
+    ]
+}
