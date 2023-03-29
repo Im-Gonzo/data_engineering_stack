@@ -5,21 +5,40 @@ from utils import parse_arguments as args
 logging.basicConfig(level=logging.INFO)
 
 
+def clean_word_list(words: list) -> list:
+    """
+    Gets rid of the following characters in each word of the input list: 
+    [',', '(', ')', '/', '\\', '[', ']', '+', '7', '.', '\t', '\n', '*']
+    """
+    chars = ",()/\\[]+7.\t\n*…:“”"
+    table = str.maketrans('', '', chars)
+    cleaned_words = []
+    for word in words:
+        if '/' in word:
+            cleaned_words.extend([w.translate(table) for w in word.split('/')])
+        else:
+            cleaned_words.append(word.translate(table))
+    return list(filter(None, cleaned_words))
+
+
 def parse_tech_stack(stack: list) -> list:
     """
     Parse the comments from the valid list of stacks:
     []
     """
-    all_words: list = []
+    dirty_words: list = []
+
+
 
     # Get all words from list
-    for comment in stack:
-        all_words.append(comment.split(' '))
+    for i, comment in enumerate(stack):
+        dirty_words.append(comment.split(' '))
     
     # Flatten nested list of lists
-    all_words = [line for sublist in all_words for line in sublist]
-
-    print(all_words)
+    dirty_words = [line.lower() for sublist in dirty_words for line in sublist]
+    clean_words = clean_word_list(dirty_words)
+    
+    print(clean_words) 
 
 
 def parse_nested_comments(comments: list) -> list:
