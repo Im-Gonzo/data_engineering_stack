@@ -33,7 +33,7 @@
         "emr": 0,
         "rethinkdb": 0
     },
-    "etl_elt_tools": {
+    "etl_tools": {
         "dbt": 0,
         "fivetran": 0,
         "airflow": 0,

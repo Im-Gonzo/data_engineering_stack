@@ -1,6 +1,9 @@
 import praw
 import logging
 import json
+import os
+import pandas as pd
+import pendulum
 from utils import parse_arguments as args
 from collections import Counter
 
@@ -15,7 +18,7 @@ def clean_word_list(words: list, non_tech_words: str = 'json/non_tech_words.json
     with open (non_tech_words, 'r') as f:
         not_tech_words = json.load(f)['words']
 
-    chars = ",()/\\[]+7.\t\n*…:“”"
+    chars = ",()/\\[]+7.\t\n*…:“”-><"
     table = str.maketrans("", "", chars)
     cleaned_words = []
     for word in words:
@@ -31,15 +34,41 @@ def clean_word_list(words: list, non_tech_words: str = 'json/non_tech_words.json
     return result_tech
 
 
-def get_insights(stack: list, tech_stack: str = "json/tech_stack.json") -> dict:
+def save_to_csv(stack: dict, id: str) -> None:
+    """Saves the provided dict of dict's at a csv file"""
+    year = pendulum.now().year
+    month = pendulum.now().month
+    file: str = f'data/{id}_{year}_{month}.csv'
+    headers: list = []
+    values: list = []
+
+    for i, category in enumerate(stack.keys()):
+        headers.append(category)
+        headers.append(f'value_{i+1}')
+
+    print(stack)
+
+    df = pd.DataFrame(columns=headers)
+
+    print(df)
+        
+    return
+
+
+def count_stacks(stack: list, tech_stack: str = "json/tech_stack.json") -> dict:
     """"""
-
-    stack_count: dict = Counter(stack)
-    with open(tech_stack, "r") as f:
+    
+    with open(tech_stack, 'r') as f:
         data = json.load(f)
+    
+    stack_count: dict = Counter(stack)
+    
+    for key in data:
+        for subkey in data[key]:
+            if stack_count.get(subkey):
+                data[key][subkey] = stack_count[subkey]
 
-    print(data)
-    return stack_count
+    return data
 
 
 def parse_tech_stack(stack: list) -> list:
@@ -179,5 +208,5 @@ if __name__ == "__main__":
     parsed_comments: list = parse_nested_comments(comments)
     tech_stack: list = parse_tech_stack(parsed_comments)
     # Get insights
-    count: dict = get_insights(tech_stack)
-    print(tech_stack)
+    count: dict = count_stacks(tech_stack)
+    save_to_csv(count, thread_id)
